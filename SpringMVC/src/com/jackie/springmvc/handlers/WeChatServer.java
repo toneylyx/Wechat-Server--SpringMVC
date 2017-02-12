@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class HelloWorld {
+public class WeChatServer {
 	
     @RequestMapping(value = "/helloworld" ,method = RequestMethod.GET)
     public void check(HttpServletRequest request,HttpServletResponse response) throws IOException{
@@ -45,6 +45,7 @@ public class HelloWorld {
     	PrintWriter writer =response.getWriter();
     	String message = null;
     	if(MessageUtil.MESSAGE_TEXT.equals(msgType)) {
+    		
     		if("1".equals(content)) {
     			content = "===×Ô¶¯»Ø¸´½éÉÜ===";
     		}
@@ -57,15 +58,18 @@ public class HelloWorld {
     		else if("?".equals(content) || "£¿".equals(content)) {
 				content = MessageUtil.menuText();
 			}
-    		message = MessageUtil.initTextMsg(toUserName, fromUserName, content);
+    		
     	}
     	
     	if(MessageUtil.MESSAGE_EVENT.equals(msgType)) {
     		String event = map.get("Event");
     		if(MessageUtil.MESSAGE_SUBSCRIBE.equals(event)) {
-    			message = MessageUtil.initTextMsg(toUserName, fromUserName, MessageUtil.menuText());
+    			content = MessageUtil.menuText();
     		}
     	}
+    	
+    	message = MessageUtil.initTextMsg(toUserName, fromUserName, content);
+    	
     	writer.print(message);
     	writer.flush();
         writer.close();
