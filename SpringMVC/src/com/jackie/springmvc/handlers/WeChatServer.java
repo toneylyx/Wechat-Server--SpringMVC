@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class WeChatServer {
 	
-    @RequestMapping(value = "/helloworld" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/wechat" ,method = RequestMethod.GET)
     public void check(HttpServletRequest request,HttpServletResponse response) throws IOException{
        String signature = request.getParameter("signature");
        String timestamp = request.getParameter("timestamp");
@@ -30,7 +30,7 @@ public class WeChatServer {
        writer.close();
     }
     
-    @RequestMapping(value = "/helloworld" ,method = RequestMethod.POST)
+    @RequestMapping(value = "/wechat" ,method = RequestMethod.POST)
     public void doBusiness(HttpServletRequest req,HttpServletResponse response) throws IOException, DocumentException{
     	
     	req.setCharacterEncoding("UTF-8");
@@ -72,6 +72,6 @@ public class WeChatServer {
     	
     	writer.print(message);
     	writer.flush();
-        writer.close();
-    }
+		writer.close();
+	}
 }
