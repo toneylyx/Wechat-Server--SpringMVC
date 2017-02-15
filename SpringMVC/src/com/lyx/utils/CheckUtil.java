@@ -1,4 +1,4 @@
-package com.jackie.springmvc.handlers;
+package com.lyx.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -11,14 +11,14 @@ public class CheckUtil {
 
 	public static boolean checkSignature(String signature, String timestamp, String nonce) {
 		String[] arr = new String[] { token, timestamp, nonce };
-		// 1.paixu
+		
 		Arrays.sort(arr);
-		// 2.
+		
 		StringBuffer context = new StringBuffer();
 		for (int i = 0; i < arr.length; i++) {
 			context.append(arr[i]);
 		}
-		// 3.jiami
+		
 		String tmp = getSha1(context.toString());
 		System.out.println("signature : " + signature);
 		System.out.println("tmp : " + tmp);
